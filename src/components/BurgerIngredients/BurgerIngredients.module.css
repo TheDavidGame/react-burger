@@ -1,0 +1,36 @@
+.tabsContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.columnsContainer {
+    padding: 40px 0 40px 0;
+}
+
+.categoryTitle{
+    text-align: left;
+}
+
+.ingredients {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.ingredientItem {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 12px;
+}
+
+.ingredientItem img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 8px;
+}
+

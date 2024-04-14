@@ -1,0 +1,19 @@
+.BurgerIngredientsContainer {
+    max-height: 900px;
+    overflow-y: auto;
+    padding-right: 15px;
+}
+
+.BurgerIngredientsContainer::-webkit-scrollbar {
+    width: 8px;
+}
+
+.BurgerIngredientsContainer::-webkit-scrollbar-thumb {
+    background-color: #8585AD;
+    border-radius: 4px;
+}
+
+.BurgerIngredientsContainer::-webkit-scrollbar-track {
+    background-color: #2F2F37;
+    border-radius: 4px;
+}
