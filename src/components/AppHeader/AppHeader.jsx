@@ -7,21 +7,21 @@ const AppHeader = () => {
         <header>
             <nav className={AppHeaderStyles.nav}>
                 <div className={`p-1 ${AppHeaderStyles.rowColumn}`}>
-                    <BurgerIcon type="secondary" />
+                    <BurgerIcon type="secondary"/>
                     <p className="pl-3 mr-10 text text_type_main-default">
                         Конструктор
                     </p>
 
-                    <ListIcon type="secondary" />
+                    <ListIcon type="secondary"/>
                     <p className="pl-3 text text_type_main-default">
                         Лента заказов
                     </p>
                 </div>
                 <div className="p-1">
-                    <Logo />
+                    <Logo/>
                 </div>
                 <div className={`p-1 ${AppHeaderStyles.rowColumn}`}>
-                    <ProfileIcon type="secondary" />
+                    <ProfileIcon type="secondary"/>
                     <p className="pl-3 text text_type_main-default">
                         Личный кабинет
                     </p>
