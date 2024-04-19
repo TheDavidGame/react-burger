@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import ingredientsData from '../utils/data';
+import ingredientsData from '../../utils/data';
 import {
     Button,
     ConstructorElement,
@@ -12,6 +12,10 @@ import BurgerConstructorStyles from "./BurgerConstructor.module.css";
 const BurgerConstructor = () => {
     const [sumPrice, setSumPrice] = useState(0);
 
+    const saucesAndFillings = ingredientsData.filter(
+        (ingredient) => ingredient.type === 'sauce' || ingredient.type === 'main'
+    );
+
     useEffect(() => {
         let totalSum = 0;
         ingredientsData.forEach((ingredient) => {
@@ -22,37 +26,44 @@ const BurgerConstructor = () => {
 
     return (
         <div className='pt-15'>
-            <ConstructorElement
-                type="top"
-                isLocked={true}
-                text="Краторная булка N-200i (верх)"
-                price={200}
-                thumbnail={"https://code.s3.yandex.net/react/code/meat-02.png"}
-            />
+            <div className="ml-7">
+                <ConstructorElement
+                    type="top"
+                    isLocked={true}
+                    text="Краторная булка N-200i (верх)"
+                    price={200}
+                    thumbnail={"https://code.s3.yandex.net/react/code/bun-02.png"}
+                />
+            </div>
+
             <div className={BurgerConstructorStyles.ingredientItem}>
 
-
-                {ingredientsData.map((ingredient =>
-                        <div key={ingredient._id}>
+                {saucesAndFillings.map((ingredient =>
+                        <div key={ingredient._id} className="mb-4 mt-4">
+                            <span className="mr-2">
+                                <DragIcon type="primary"/>
+                            </span>
                             <ConstructorElement
-                                text="Краторная булка N-200i (верх)"
+                                text={ingredient.name}
                                 price={ingredient.price}
                                 thumbnail={ingredient.image}
                             />
                         </div>
                 ))}
             </div>
-            <ConstructorElement
-                type="bottom"
-                isLocked={true}
-                text="Краторная булка N-200i (низ)"
-                price={200}
-                thumbnail={"https://code.s3.yandex.net/react/code/meat-02.png"}
-            />
+            <div className="ml-7">
+                <ConstructorElement
+                    type="bottom"
+                    isLocked={true}
+                    text="Краторная булка N-200i (низ)"
+                    price={200}
+                    thumbnail={"https://code.s3.yandex.net/react/code/bun-02.png"}
+                />
+            </div>
             <div className={`mt-5 ${BurgerConstructorStyles.order}`}>
-                    <span className="mr-10" style={{display: 'flex'}}>
+                    <span className={`mr-10 ${BurgerConstructorStyles.priceFlex}`} >
                     <p className="text text_type_main-medium mr-2">{sumPrice} </p>
-                    <CurrencyIcon type="primary" style={{width: '24px'}}/>
+                    <CurrencyIcon type="primary" className={BurgerConstructorStyles.iconPrice}/>
                     </span>
                 <Button htmlType="button" type="primary" size="medium">
                     Оформить заказ

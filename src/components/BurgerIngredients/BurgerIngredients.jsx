@@ -1,7 +1,7 @@
 import React, {useState, useRef} from 'react';
 import {Counter, CurrencyIcon, Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerIngredientsStyle from './BurgerIngredients.module.css';
-import ingredientsData from '../utils/data';
+import ingredientsData from '../../utils/data';
 
 const BurgerIngredients = () => {
     const [currentTab, setCurrentTab] = useState('buns');
@@ -25,7 +25,7 @@ const BurgerIngredients = () => {
 
     return (
         <div>
-            <p className="mt-5 text text_type_main-large" style={{textAlign: 'left'}}>
+            <p className="mt-5 text text_type_main-large">
                 Соберите бургеры
             </p>
             <div className={BurgerIngredientsStyle.tabsContainer}>
@@ -51,7 +51,7 @@ const BurgerIngredients = () => {
                                     <img src={item.image} alt={item.name}/>
                                     <Counter count={10} size="default" extraClass="m-1"/>
                                     <p className="text text_type_main-default">{item.name}</p>
-                                    <div style={{display: 'flex', alignItems: 'center'}}>
+                                    <div className={BurgerIngredientsStyle.priceItem}>
                                         <p className="t ext text_type_main-medium mr-1">{item.price}</p> <CurrencyIcon
                                         type="primary"/>
                                     </div>
@@ -70,7 +70,7 @@ const BurgerIngredients = () => {
                                     <img src={item.image} alt={item.name}/>
                                     <Counter count={10} size="default" extraClass="m-1"/>
                                     <p className="text text_type_main-default">{item.name}</p>
-                                    <div style={{display: 'flex', alignItems: 'center'}}>
+                                    <div className={BurgerIngredientsStyle.priceItem}>
                                         <p className="text text_type_main-medium mr-1">{item.price}</p> <CurrencyIcon
                                         type="primary"/>
                                     </div>
@@ -89,7 +89,7 @@ const BurgerIngredients = () => {
                                     <img src={item.image} alt={item.name}/>
                                     <Counter count={10} size="default" extraClass="m-1"/>
                                     <p className="text text_type_main-default">{item.name}</p>
-                                    <div style={{display: 'flex', alignItems: 'center'}}>
+                                    <div className={BurgerIngredientsStyle.priceItem}>
                                         <p className="text text_type_main-medium mr-1">{item.price}</p> <CurrencyIcon
                                         type="primary"/>
                                     </div>

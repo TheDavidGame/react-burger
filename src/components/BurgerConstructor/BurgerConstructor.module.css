@@ -23,3 +23,11 @@
     background-color: #2F2F37;
     border-radius: 4px;
 }
+
+.priceFlex {
+    display: flex;
+}
+
+.iconPrice {
+    width: 24px;
+}
