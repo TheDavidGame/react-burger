@@ -1,0 +1,33 @@
+.order {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.ingredientItem {
+    height: 500px;
+    overflow-y: auto;
+}
+
+.ingredientItem::-webkit-scrollbar {
+    width: 8px;
+}
+
+.ingredientItem::-webkit-scrollbar-thumb {
+    background-color: #8585AD;
+    border-radius: 4px;
+}
+
+.ingredientItem::-webkit-scrollbar-track {
+    background-color: #2F2F37;
+    border-radius: 4px;
+}
+
+.priceFlex {
+    display: flex;
+}
+
+.iconPrice {
+    width: 24px;
+}

@@ -1,0 +1,57 @@
+.tabsContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.allColumnsContainer {
+    height: 670px;
+    overflow-y: auto;
+}
+.allColumnsContainer::-webkit-scrollbar {
+    width: 8px;
+}
+
+.allColumnsContainer::-webkit-scrollbar-thumb {
+    background-color: #8585AD;
+    border-radius: 4px;
+}
+
+.allColumnsContainer::-webkit-scrollbar-track {
+    background-color: #2F2F37;
+    border-radius: 4px;
+}
+.columnsContainer {
+    padding: 40px 0 40px 0;
+}
+
+.categoryTitle{
+    text-align: left;
+}
+
+.ingredients {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.ingredientItem {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 12px;
+}
+
+.ingredientItem img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 8px;
+}
+
+.priceItem {
+    display: flex;
+    align-items: center;
+}
