@@ -1,4 +1,4 @@
-export interface BurgerIngredient {
+export interface BurgerIngredientType {
     _id: string;
     name: string;
     type: string;
@@ -10,4 +10,25 @@ export interface BurgerIngredient {
     image: string;
     image_mobile: string;
     image_large: string;
+}
+
+export interface BurgerIngredientsProps {
+    ingredientsData: BurgerIngredientType[];
+}
+
+export interface ModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+    title: string;
+    children: React.ReactNode;
+}
+
+export interface ModalOverlayProps {
+    isOpen: boolean;
+    onClose: () => void;
+    children: React.ReactNode;
+}
+
+export interface IngredientDetailsProps {
+    selectedIngredient: BurgerIngredientType;
 }

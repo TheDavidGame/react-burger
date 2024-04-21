@@ -1,22 +1,28 @@
 import React, {useState, useRef} from 'react';
 import {Counter, CurrencyIcon, Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerIngredientsStyle from './BurgerIngredients.module.css';
-import ingredientsData from '../../utils/data';
+import Modal from "../Modal/Modal";
+import IngredientDetails from "../IngredientDetails/IngredientDetails";
+import type {BurgerIngredientsProps, BurgerIngredientType} from "../domains/entity/index.entity";
 
-const BurgerIngredients = () => {
+const BurgerIngredients = ({ingredientsData}: BurgerIngredientsProps) => {
     const [currentTab, setCurrentTab] = useState('buns');
+
+    const [selectedIngredient, setSelectedIngredient] = useState<BurgerIngredientType | null>(null);
+
+
     const categoriesRef = {
-        buns: useRef(null),
-        sauces: useRef(null),
-        main: useRef(null),
+        buns: useRef<HTMLDivElement>(null),
+        sauces: useRef<HTMLDivElement>(null),
+        main: useRef<HTMLDivElement>(null),
     };
 
-    const handleTabClick = (value) => {
+    const handleTabClick = (value: 'buns' | 'sauces' | 'main') => {
         setCurrentTab(value);
         scrollToCategory(value);
     };
 
-    const scrollToCategory = (category) => {
+    const scrollToCategory = (category: keyof typeof categoriesRef) => {
         const ref = categoriesRef[category];
         if (ref && ref.current) {
             ref.current.scrollIntoView({behavior: 'smooth', block: 'start'});
@@ -39,7 +45,6 @@ const BurgerIngredients = () => {
                     Начинки
                 </Tab>
             </div>
-
             <div className={BurgerIngredientsStyle.allColumnsContainer}>
                 <div ref={categoriesRef.buns} className={BurgerIngredientsStyle.columnsContainer}>
                     <h3 className={`text text_type_main-medium ${BurgerIngredientsStyle.categoryTitle}`}>Булки</h3>
@@ -47,7 +52,8 @@ const BurgerIngredients = () => {
                         {ingredientsData
                             .filter(item => item.type === 'bun')
                             .map(item => (
-                                <div key={item._id} className={BurgerIngredientsStyle.ingredientItem}>
+                                <div key={item._id} className={BurgerIngredientsStyle.ingredientItem}
+                                     onClick={() => setSelectedIngredient(item)}>
                                     <img src={item.image} alt={item.name}/>
                                     <Counter count={10} size="default" extraClass="m-1"/>
                                     <p className="text text_type_main-default">{item.name}</p>
@@ -66,7 +72,8 @@ const BurgerIngredients = () => {
                         {ingredientsData
                             .filter(item => item.type === 'sauce')
                             .map(item => (
-                                <div key={item._id} className={BurgerIngredientsStyle.ingredientItem}>
+                                <div key={item._id} className={BurgerIngredientsStyle.ingredientItem}
+                                     onClick={() => setSelectedIngredient(item)}>
                                     <img src={item.image} alt={item.name}/>
                                     <Counter count={10} size="default" extraClass="m-1"/>
                                     <p className="text text_type_main-default">{item.name}</p>
@@ -85,7 +92,8 @@ const BurgerIngredients = () => {
                         {ingredientsData
                             .filter(item => item.type === 'main')
                             .map(item => (
-                                <div key={item._id} className={BurgerIngredientsStyle.ingredientItem}>
+                                <div key={item._id} className={BurgerIngredientsStyle.ingredientItem}
+                                     onClick={() => setSelectedIngredient(item)}>
                                     <img src={item.image} alt={item.name}/>
                                     <Counter count={10} size="default" extraClass="m-1"/>
                                     <p className="text text_type_main-default">{item.name}</p>
@@ -98,6 +106,17 @@ const BurgerIngredients = () => {
                     </div>
                 </div>
             </div>
+            {selectedIngredient && (
+                <Modal
+                    isOpen={selectedIngredient !== null}
+                    onClose={() => setSelectedIngredient(null)}
+                    title="Детали ингредиента"
+                >
+                    <div>
+                        <IngredientDetails selectedIngredient={selectedIngredient}/>
+                    </div>
+                </Modal>
+            )}
         </div>
     );
 };
