@@ -61,7 +61,7 @@ const BurgerConstructor = ({ingredientsData}: BurgerIngredientsProps) => {
                     text="Краторная булка N-200i (низ)"
                     price={200}
                     thumbnail={"https://code.s3.yandex.net/react/code/bun-02.png"}
-                />a
+                />
             </div>
             <div className={`mt-5 ${BurgerConstructorStyles.order}`}>
                     <span className={`mr-10 ${BurgerConstructorStyles.priceFlex}`}>
