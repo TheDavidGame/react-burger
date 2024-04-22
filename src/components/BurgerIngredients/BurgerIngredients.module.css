@@ -8,6 +8,7 @@
     height: 670px;
     overflow-y: auto;
 }
+
 .allColumnsContainer::-webkit-scrollbar {
     width: 8px;
 }
@@ -21,11 +22,12 @@
     background-color: #2F2F37;
     border-radius: 4px;
 }
+
 .columnsContainer {
     padding: 40px 0 40px 0;
 }
 
-.categoryTitle{
+.categoryTitle {
     text-align: left;
 }
 
