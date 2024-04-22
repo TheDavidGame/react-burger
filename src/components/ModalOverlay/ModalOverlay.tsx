@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import ModalOverlayStyles from './ModalOverlay.module.css';
 import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-import {ModalOverlayProps} from "../domains/entity/index.entity";
+import {ModalOverlayProps} from "../../domains/entity/index.entity";
 
 const ModalOverlay = ({isOpen, onClose, children}: ModalOverlayProps) => {
     useEffect(() => {

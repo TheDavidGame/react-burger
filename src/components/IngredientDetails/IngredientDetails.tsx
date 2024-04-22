@@ -1,6 +1,6 @@
 import React from 'react';
 import IngredientDetailsStyles from './IngredientDetails.module.css';
-import {IngredientDetailsProps} from "../domains/entity/index.entity";
+import {IngredientDetailsProps} from "../../domains/entity/index.entity";
 
 const IngredientDetails = ({selectedIngredient}: IngredientDetailsProps) => {
     if (!selectedIngredient) return null;

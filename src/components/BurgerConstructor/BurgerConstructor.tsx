@@ -8,7 +8,7 @@ import {
 import BurgerConstructorStyles from "./BurgerConstructor.module.css";
 import Modal from "../Modal/Modal";
 import OrderDetails from "../OrderDetails/OrderDetails";
-import {BurgerIngredientsProps} from "../domains/entity/index.entity";
+import {BurgerIngredientsProps} from "../../domains/entity/index.entity";
 
 const BurgerConstructor = ({ingredientsData}: BurgerIngredientsProps) => {
     const [sumPrice, setSumPrice] = useState(0);
@@ -25,7 +25,7 @@ const BurgerConstructor = ({ingredientsData}: BurgerIngredientsProps) => {
             totalSum += ingredient.price;
         });
         setSumPrice(totalSum);
-    }, []);
+    }, [ingredientsData]);
 
     return (
         <div className='pt-15'>

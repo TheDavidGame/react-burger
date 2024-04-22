@@ -1,6 +1,6 @@
 import React from 'react';
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
-import {ModalProps} from "../domains/entity/index.entity";
+import {ModalProps} from "../../domains/entity/index.entity";
 
 const Modal = ({isOpen, onClose, title, children}: ModalProps) => {
     return (

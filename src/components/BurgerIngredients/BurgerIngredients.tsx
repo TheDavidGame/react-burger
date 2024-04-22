@@ -3,7 +3,7 @@ import {Counter, CurrencyIcon, Tab} from "@ya.praktikum/react-developer-burger-u
 import BurgerIngredientsStyle from './BurgerIngredients.module.css';
 import Modal from "../Modal/Modal";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
-import type {BurgerIngredientsProps, BurgerIngredientType} from "../domains/entity/index.entity";
+import type {BurgerIngredientsProps, BurgerIngredientType} from "../../domains/entity/index.entity";
 
 const BurgerIngredients = ({ingredientsData}: BurgerIngredientsProps) => {
     const [currentTab, setCurrentTab] = useState('buns');
