@@ -16,14 +16,14 @@ export interface BurgerIngredientsProps {
     ingredientsData: BurgerIngredientType[];
 }
 
-export interface ModalProps {
+export interface ModalOverlayProps {
     isOpen: boolean;
     onClose: () => void;
     title: string;
     children: React.ReactNode;
 }
 
-export interface ModalOverlayProps {
+export interface ModalProps {
     isOpen: boolean;
     onClose: () => void;
     children: React.ReactNode;

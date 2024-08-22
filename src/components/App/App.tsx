@@ -11,9 +11,13 @@ function App() {
     useEffect(() => {
         const fetchIngredients = async () => {
             try {
-                const response = await fetch(API_URL);
-                const data = await response.json();
-                setIngredients(data.data);
+                const response = await fetch(API_URL).then(res => {
+                    if (res.ok) {
+                        return res.json();
+                    }
+                    return Promise.reject(`Ошибка ${res.status}`);
+                });
+                setIngredients(response.data);
             } catch (error) {
                 console.log(error);
             }
