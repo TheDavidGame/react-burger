@@ -17,15 +17,13 @@ export interface BurgerIngredientsProps {
 }
 
 export interface ModalOverlayProps {
-    isOpen: boolean;
     onClose: () => void;
-    title: string;
-    children: React.ReactNode;
 }
 
 export interface ModalProps {
     isOpen: boolean;
     onClose: () => void;
+    title: string;
     children: React.ReactNode;
 }
 

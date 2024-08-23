@@ -2,6 +2,7 @@ import React, {useState, useRef} from 'react';
 import {Counter, CurrencyIcon, Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerIngredientsStyle from './BurgerIngredients.module.css';
 import ModalOverlay from "../ModalOverlay/ModalOverlay";
+import Modal from '../Modal/Modal';
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import type {BurgerIngredientsProps, BurgerIngredientType} from "../../domains/entity/index.entity";
 
@@ -107,7 +108,7 @@ const BurgerIngredients = ({ingredientsData}: BurgerIngredientsProps) => {
                 </div>
             </div>
             {selectedIngredient && (
-                <ModalOverlay
+                <Modal
                     isOpen={selectedIngredient !== null}
                     onClose={() => setSelectedIngredient(null)}
                     title="Детали ингредиента"
@@ -115,7 +116,7 @@ const BurgerIngredients = ({ingredientsData}: BurgerIngredientsProps) => {
                     <div>
                         <IngredientDetails selectedIngredient={selectedIngredient}/>
                     </div>
-                </ModalOverlay>
+                </Modal>
             )}
         </div>
     );

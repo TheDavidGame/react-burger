@@ -6,7 +6,7 @@ import {
     DragIcon
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerConstructorStyles from "./BurgerConstructor.module.css";
-import ModalOverlay from "../ModalOverlay/ModalOverlay";
+import Modal from '../Modal/Modal';
 import OrderDetails from "../OrderDetails/OrderDetails";
 import {BurgerIngredientsProps} from "../../domains/entity/index.entity";
 
@@ -73,13 +73,13 @@ const BurgerConstructor = ({ingredientsData}: BurgerIngredientsProps) => {
                 </Button>
             </div>
             {openOrder && (
-                <ModalOverlay
+                <Modal
                     isOpen={openOrder}
                     onClose={() => setOpenOrder(false)}
                     title={""}
                 >
                     <OrderDetails/>
-                </ModalOverlay>
+                </Modal>
             )}
         </div>
     );
