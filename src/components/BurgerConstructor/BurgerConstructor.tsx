@@ -1,16 +1,19 @@
 import React, {useEffect, useState} from 'react';
-import ingredientsData from '../../utils/data';
 import {
     Button,
     ConstructorElement,
     CurrencyIcon,
-    DeleteIcon,
     DragIcon
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerConstructorStyles from "./BurgerConstructor.module.css";
+import Modal from '../Modal/Modal';
+import OrderDetails from "../OrderDetails/OrderDetails";
+import {BurgerIngredientsProps} from "../../domains/entity/index.entity";
 
-const BurgerConstructor = () => {
+const BurgerConstructor = ({ingredientsData}: BurgerIngredientsProps) => {
     const [sumPrice, setSumPrice] = useState(0);
+
+    const [openOrder, setOpenOrder] = useState(false);
 
     const saucesAndFillings = ingredientsData.filter(
         (ingredient) => ingredient.type === 'sauce' || ingredient.type === 'main'
@@ -22,7 +25,7 @@ const BurgerConstructor = () => {
             totalSum += ingredient.price;
         });
         setSumPrice(totalSum);
-    }, []);
+    }, [ingredientsData]);
 
     return (
         <div className='pt-15'>
@@ -61,14 +64,23 @@ const BurgerConstructor = () => {
                 />
             </div>
             <div className={`mt-5 ${BurgerConstructorStyles.order}`}>
-                    <span className={`mr-10 ${BurgerConstructorStyles.priceFlex}`} >
+                    <span className={`mr-10 ${BurgerConstructorStyles.priceFlex}`}>
                     <p className="text text_type_main-medium mr-2">{sumPrice} </p>
-                    <CurrencyIcon type="primary" className={BurgerConstructorStyles.iconPrice}/>
+                    <CurrencyIcon type="primary"/>
                     </span>
-                <Button htmlType="button" type="primary" size="medium">
+                <Button htmlType="button" type="primary" size="medium" onClick={() => setOpenOrder(true)}>
                     Оформить заказ
                 </Button>
             </div>
+            {openOrder && (
+                <Modal
+                    isOpen={openOrder}
+                    onClose={() => setOpenOrder(false)}
+                    title={""}
+                >
+                    <OrderDetails/>
+                </Modal>
+            )}
         </div>
     );
 }

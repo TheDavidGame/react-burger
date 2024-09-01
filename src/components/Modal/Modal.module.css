@@ -1,0 +1,24 @@
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #1C1C21;
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    width: 600px;
+    height: 530px;
+    z-index: 1010;
+}
+
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+}
+
+.closeBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
