@@ -6,35 +6,15 @@ import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
 import {API_URL} from "../../constants";
 
 function App() {
-    const [ingredients, setIngredients] = useState([]);
-
-    useEffect(() => {
-        const fetchIngredients = async () => {
-            try {
-                const response = await fetch(API_URL).then(res => {
-                    if (res.ok) {
-                        return res.json();
-                    }
-                    return Promise.reject(`Ошибка ${res.status}`);
-                });
-                setIngredients(response.data);
-            } catch (error) {
-                console.log(error);
-            }
-        };
-
-        fetchIngredients();
-    }, []);
-
     return (
         <div className="App">
             <AppHeader/>
             <main className={AppStyle.MainContainer}>
                 <div className={AppStyle.ItemContainer}>
-                    <BurgerIngredients ingredientsData={ingredients}/>
+                    <BurgerIngredients/>
                 </div>
                 <div className={AppStyle.ItemContainer}>
-                    <BurgerConstructor ingredientsData={ingredients}/>
+                    <BurgerConstructor/>
                 </div>
             </main>
 
