@@ -5,16 +5,16 @@ import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import {ModalProps} from "../../domains/entity/index.entity";
 import ModalOverlay from "../ModalOverlay/ModalOverlay";
 
-const Modal = ({isOpen, onClose, title, children}: ModalProps) => {
+const Modal = ({ onClose, title, children}: ModalProps) => {
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.key === 'Escape' && isOpen) {
+            if (e.key === 'Escape') {
                 onClose();
             }
         };
 
         const handleClickOutside = (e: MouseEvent) => {
-            if ((e.target as HTMLElement).classList.contains(ModalOverlayStyles.modalOverlay) && isOpen) {
+            if ((e.target as HTMLElement).classList.contains(ModalOverlayStyles.modalOverlay)) {
                 onClose();
             }
         };
@@ -26,9 +26,7 @@ const Modal = ({isOpen, onClose, title, children}: ModalProps) => {
             document.removeEventListener('keydown', handleKeyDown);
             document.removeEventListener('mousedown', handleClickOutside);
         };
-    }, [isOpen, onClose]);
-
-    if (!isOpen) return null;
+    }, [onClose]);
 
     const modalsRoot = document.getElementById('modals');
     if (!modalsRoot) return null;

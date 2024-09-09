@@ -48,16 +48,14 @@ const BurgerConstructor = () => {
 
         if (draggedIngredient) {
             const ingredient = JSON.parse(draggedIngredient);
+            const ingredientWithId = {
+                ...ingredient,
+                uniqueId: uuidv4(),
+            };
             if (ingredient.type === 'bun') {
-                dispatch(addBunsItem({
-                    ...ingredient,
-                    uniqueId: uuidv4(),
-                }));
+                dispatch(addBunsItem(ingredientWithId));
             } else {
-                dispatch(addIngredientToConstructor({
-                    ...ingredient,
-                    uniqueId: uuidv4(),
-                }));
+                dispatch(addIngredientToConstructor(ingredientWithId));
             }
         }
     };
@@ -100,7 +98,7 @@ const BurgerConstructor = () => {
     return (
         <div className='pt-15' onDrop={handleDrop} onDragOver={handleDragOver}>
             <div className="ml-7">
-                {bunsItem && (
+                {bunsItem ? (
                     <ConstructorElement
                         type="top"
                         isLocked={true}
@@ -108,7 +106,7 @@ const BurgerConstructor = () => {
                         price={bunsItem.price}
                         thumbnail={bunsItem.image}
                     />
-                )}
+                ) : <div>Пожалуйста, перенесите сюда булку и ингредиенты для создания заказа</div>}
             </div>
 
             <div className={BurgerConstructorStyles.ingredientItem}>
@@ -155,7 +153,6 @@ const BurgerConstructor = () => {
             </div>
             {openOrder && (
                 <Modal
-                    isOpen={openOrder}
                     onClose={() => setOpenOrder(false)}
                     title={""}
                 >

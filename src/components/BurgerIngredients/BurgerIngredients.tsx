@@ -162,7 +162,6 @@ const BurgerIngredients = () => {
             </div>
             {selectedIngredient && (
                 <Modal
-                    isOpen={selectedIngredient !== null}
                     onClose={() => dispatch(removeSelectedIngredient())}
                     title="Детали ингредиента"
                 >

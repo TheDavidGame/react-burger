@@ -3,28 +3,14 @@ import {API_URL} from "../../constants";
 import {IngredientsState, BurgerIngredientType} from "../../domains/entity/index.entity";
 import {AppDispatch} from "../../index";
 import {addBunsItem} from "./ConstructorIngredients";
+import {checkResponse} from "../../utils";
 
 export const fetchIngredients = createAsyncThunk<BurgerIngredientType[], void, { dispatch: AppDispatch }>(
     'ingredients/fetchIngredients',
     async (_, {dispatch, rejectWithValue}) => {
-        try {
-            const res = await fetch(API_URL);
-            if (!res.ok) {
-                throw new Error(`Ошибка ${res.status}`);
-            }
-            const data = await res.json();
-            const ingredients = data.data;
-
-            const bun = ingredients.find((item: BurgerIngredientType) => item._id === '643d69a5c3f7b9001cfa093c');
-            if (bun) {
-                dispatch(addBunsItem(bun));
-            }
-
-            return ingredients;
-        } catch (error) {
-            console.log(error);
-            return rejectWithValue(error);
-        }
+        const res = await fetch(API_URL);
+        const ingredients = await checkResponse(res);
+        return ingredients.data;
     }
 );
 

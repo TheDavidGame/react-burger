@@ -10,11 +10,7 @@ const ConstructorIngredients = createSlice({
     } as ConstructorIngredientsState,
     reducers: {
         addIngredientToConstructor: (state, action: PayloadAction<BurgerIngredientType>) => {
-            const ingredientWithId = {
-                ...action.payload,
-                uniqueId: uuidv4(),
-            };
-            state.itemsConstructor.push(ingredientWithId);
+            state.itemsConstructor.push(action.payload);
         },
         deleteIngredientToConstructor: (state, action: PayloadAction<string>) => {
             state.itemsConstructor = state.itemsConstructor.filter(ingredient => ingredient.uniqueId !== action.payload);
