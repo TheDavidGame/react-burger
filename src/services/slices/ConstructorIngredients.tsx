@@ -16,7 +16,10 @@ const ConstructorIngredients = createSlice({
             state.itemsConstructor = state.itemsConstructor.filter(ingredient => ingredient.uniqueId !== action.payload);
         },
         addBunsItem: (state, action: PayloadAction<BurgerIngredientType>) => {
-            state.bunsItem = action.payload;
+            if (state.bunsItem) {
+                state.bunsItem.count = 0;
+            }
+            state.bunsItem = { ...action.payload, count: 2 };
         },
         reorderIngredients: (state, action: PayloadAction<{fromIndex: number, toIndex: number}>) => {
             const {fromIndex, toIndex} = action.payload;

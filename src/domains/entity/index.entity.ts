@@ -1,5 +1,3 @@
-import {configureStore} from "@reduxjs/toolkit";
-
 export interface BurgerIngredientType {
     _id: string;
     uniqueId?: string;
@@ -13,6 +11,7 @@ export interface BurgerIngredientType {
     image: string;
     image_mobile: string;
     image_large: string;
+    count: number;
 }
 
 export interface ModalOverlayProps {

@@ -12,7 +12,8 @@ import {removeSelectedIngredient, setSelectedIngredient} from "../../services/sl
 const BurgerIngredients = () => {
     const dispatch = useDispatch<AppDispatch>();
     const {items: ingredientsData} = useSelector((state: RootState) => state.ingredients);
-    const {selectedIngredient: selectedIngredient} = useSelector((state: RootState) => state.ingredientInformation);
+    const {itemsConstructor, bunsItem} = useSelector((state: RootState) => state.constructorIngredients);
+    const {selectedIngredient} = useSelector((state: RootState) => state.ingredientInformation);
     const [currentTab, setCurrentTab] = useState('buns');
 
     useEffect(() => {
@@ -71,6 +72,14 @@ const BurgerIngredients = () => {
         event.dataTransfer.setData('ingredient', JSON.stringify(ingredient));
     };
 
+    const getIngredientCount = (ingredient: BurgerIngredientType) => {
+        if (ingredient.type === 'bun' && bunsItem?._id === ingredient._id) {
+            return bunsItem.count;
+        }
+        const matchingIngredients = itemsConstructor.filter(item => item._id === ingredient._id);
+        return matchingIngredients.length;
+    };
+
     return (
         <div>
             <p className="mt-5 text text_type_main-large">
@@ -101,7 +110,7 @@ const BurgerIngredients = () => {
                                      onClick={() => dispatch(setSelectedIngredient(item))}
                                 >
                                     <img src={item.image} alt={item.name}/>
-                                    <Counter count={10} size="default" extraClass="m-1"/>
+                                    <Counter count={getIngredientCount(item)} size="default" extraClass="m-1"/>
                                     <p className="text text_type_main-default">{item.name}</p>
                                     <div className={BurgerIngredientsStyle.priceItem}>
                                         <p className="t ext text_type_main-medium mr-1">{item.price}</p> <CurrencyIcon
@@ -125,7 +134,7 @@ const BurgerIngredients = () => {
                                      onClick={() => dispatch(setSelectedIngredient(item))}
                                 >
                                     <img src={item.image} alt={item.name}/>
-                                    <Counter count={10} size="default" extraClass="m-1"/>
+                                    <Counter count={getIngredientCount(item)} size="default" extraClass="m-1"/>
                                     <p className="text text_type_main-default">{item.name}</p>
                                     <div className={BurgerIngredientsStyle.priceItem}>
                                         <p className="text text_type_main-medium mr-1">{item.price}</p> <CurrencyIcon
@@ -149,7 +158,7 @@ const BurgerIngredients = () => {
                                      onClick={() => dispatch(setSelectedIngredient(item))}
                                 >
                                     <img src={item.image} alt={item.name}/>
-                                    <Counter count={10} size="default" extraClass="m-1"/>
+                                    <Counter count={getIngredientCount(item)} size="default" extraClass="m-1"/>
                                     <p className="text text_type_main-default">{item.name}</p>
                                     <div className={BurgerIngredientsStyle.priceItem}>
                                         <p className="text text_type_main-medium mr-1">{item.price}</p> <CurrencyIcon
