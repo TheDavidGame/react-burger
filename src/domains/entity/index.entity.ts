@@ -1,5 +1,6 @@
 export interface BurgerIngredientType {
     _id: string;
+    uniqueId?: string;
     name: string;
     type: string;
     proteins: number;
@@ -10,10 +11,7 @@ export interface BurgerIngredientType {
     image: string;
     image_mobile: string;
     image_large: string;
-}
-
-export interface BurgerIngredientsProps {
-    ingredientsData: BurgerIngredientType[];
+    count: number;
 }
 
 export interface ModalOverlayProps {
@@ -21,7 +19,6 @@ export interface ModalOverlayProps {
 }
 
 export interface ModalProps {
-    isOpen: boolean;
     onClose: () => void;
     title: string;
     children: React.ReactNode;
@@ -29,4 +26,28 @@ export interface ModalProps {
 
 export interface IngredientDetailsProps {
     selectedIngredient: BurgerIngredientType;
+}
+
+export interface IngredientsState {
+    items: BurgerIngredientType[];
+}
+
+export interface ConstructorIngredientsState {
+    itemsConstructor: BurgerIngredientType[];
+    bunsItem: BurgerIngredientType | null
+}
+
+export interface IngredientInformationState {
+    selectedIngredient: BurgerIngredientType | null;
+}
+
+export interface RootState {
+    ingredients: IngredientsState;
+    constructorIngredients: ConstructorIngredientsState;
+    ingredientInformation: IngredientInformationState;
+    order: OrderState;
+}
+
+export interface OrderState {
+    orderNumber: number | null;
 }
