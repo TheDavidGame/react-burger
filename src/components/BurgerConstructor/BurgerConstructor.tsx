@@ -16,11 +16,13 @@ import {
     addIngredientToConstructor,
     deleteIngredientToConstructor, reorderIngredients
 } from "../../services/slices/ConstructorIngredients";
+import {useNavigate} from 'react-router-dom';
 import {v4 as uuidv4} from 'uuid';
 import {fetchOrder} from "../../services/slices/Order";
 
 const BurgerConstructor = () => {
     const dispatch = useDispatch<AppDispatch>();
+    const navigate = useNavigate();
     const {itemsConstructor: ingredientsData} = useSelector((state: RootState) => state.constructorIngredients);
     const {bunsItem: bunsItem} = useSelector((state: RootState) => state.constructorIngredients);
 
@@ -87,13 +89,18 @@ const BurgerConstructor = () => {
     };
 
     const handleOrder = async () => {
-        const ingredientIds = ingredientsData.map(ingredient => ingredient._id);
-        if (bunsItem) {
-            ingredientIds.push(bunsItem._id);
-            ingredientIds.push(bunsItem._id);
+        if (localStorage.getItem('accessToken')) {
+            const ingredientIds = ingredientsData.map(ingredient => ingredient._id);
+            if (bunsItem) {
+                ingredientIds.push(bunsItem._id);
+                ingredientIds.push(bunsItem._id);
+            }
+            await dispatch(fetchOrder(ingredientIds));
+            setOpenOrder(true);
+        } else {
+            navigate('/login');
         }
-        await dispatch(fetchOrder(ingredientIds));
-        setOpenOrder(true);
+
     };
     return (
         <div className='pt-15' onDrop={handleDrop} onDragOver={handleDragOver}>

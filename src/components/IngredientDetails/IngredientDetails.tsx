@@ -2,10 +2,16 @@ import React from 'react';
 import IngredientDetailsStyles from './IngredientDetails.module.css';
 import {IngredientDetailsProps} from "../../domains/entity/index.entity";
 
-const IngredientDetails = ({selectedIngredient}: IngredientDetailsProps) => {
+const IngredientDetails = ({selectedIngredient, showTitle}: IngredientDetailsProps) => {
     if (!selectedIngredient) return null;
     return (
         <div className={IngredientDetailsStyles.wrapper}>
+            {showTitle ? (
+                <p className="text text_type_main-large mt-20">
+                    Детали ингредиента
+                </p>
+            ) : <></>}
+
             <img src={selectedIngredient.image} alt={selectedIngredient.name}
                  className={IngredientDetailsStyles.image}/>
             <p className={`text text_type_main-medium mt-4 mb-8 ${IngredientDetailsStyles.discription}`}>{selectedIngredient.name}</p>

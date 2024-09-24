@@ -1,12 +1,12 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {OrderState} from "../../domains/entity/index.entity";
-import {API_ORDER_URL, API_URL} from "../../constants";
+import {API_URL} from "../../constants";
 import {checkResponse} from "../../utils";
 
 export const fetchOrder = createAsyncThunk<number, string[]>(
     'order/fetchOrder',
     async (ingredientIds, {rejectWithValue}) => {
-        const res = await fetch(API_ORDER_URL, {
+        const res = await fetch(`${API_URL}/orders`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

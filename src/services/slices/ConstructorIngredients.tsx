@@ -1,6 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {BurgerIngredientType, ConstructorIngredientsState} from "../../domains/entity/index.entity";
-import {v4 as uuidv4} from 'uuid';
 
 const ConstructorIngredients = createSlice({
     name: 'constructor',
@@ -19,9 +18,9 @@ const ConstructorIngredients = createSlice({
             if (state.bunsItem) {
                 state.bunsItem.count = 0;
             }
-            state.bunsItem = { ...action.payload, count: 2 };
+            state.bunsItem = {...action.payload, count: 2};
         },
-        reorderIngredients: (state, action: PayloadAction<{fromIndex: number, toIndex: number}>) => {
+        reorderIngredients: (state, action: PayloadAction<{ fromIndex: number, toIndex: number }>) => {
             const {fromIndex, toIndex} = action.payload;
             const [removed] = state.itemsConstructor.splice(fromIndex, 1);
             state.itemsConstructor.splice(toIndex, 0, removed);

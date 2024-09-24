@@ -8,8 +8,9 @@ import {Provider} from "react-redux";
 
 import ingredients from './services/slices/Ingredients'
 import constructorIngredients from './services/slices/ConstructorIngredients'
-import ingredientInformation from './services/slices/IngredientInformation'
 import order from './services/slices/Order'
+import forgotPasswordSlice from './services/slices/ForgotPasswordSlice'
+import serverSlice from './services/slices/ServerSlice'
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -19,8 +20,9 @@ const store = configureStore({
     reducer: {
         ingredients,
         constructorIngredients,
-        ingredientInformation,
-        order
+        order,
+        forgotPasswordSlice,
+        serverSlice
     }
 });
 

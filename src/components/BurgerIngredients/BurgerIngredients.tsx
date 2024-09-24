@@ -1,19 +1,17 @@
 import React, {useState, useRef, useEffect} from 'react';
 import {Counter, CurrencyIcon, Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerIngredientsStyle from './BurgerIngredients.module.css';
-import Modal from '../Modal/Modal';
-import IngredientDetails from "../IngredientDetails/IngredientDetails";
+import {useNavigate} from "react-router-dom";
 import type {BurgerIngredientType, RootState} from "../../domains/entity/index.entity";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchIngredients} from "../../services/slices/Ingredients";
 import {AppDispatch} from "../../index";
-import {removeSelectedIngredient, setSelectedIngredient} from "../../services/slices/IngredientInformation";
 
 const BurgerIngredients = () => {
     const dispatch = useDispatch<AppDispatch>();
+    const navigate = useNavigate();
     const {items: ingredientsData} = useSelector((state: RootState) => state.ingredients);
     const {itemsConstructor, bunsItem} = useSelector((state: RootState) => state.constructorIngredients);
-    const {selectedIngredient} = useSelector((state: RootState) => state.ingredientInformation);
     const [currentTab, setCurrentTab] = useState('buns');
 
     useEffect(() => {
@@ -107,7 +105,9 @@ const BurgerIngredients = () => {
                                      onDragStart={(event) => handleDragStart(item, event)}
                                      key={item._id}
                                      className={BurgerIngredientsStyle.ingredientItem}
-                                     onClick={() => dispatch(setSelectedIngredient(item))}
+                                     onClick={() => {
+                                         navigate(`/ingredients/${item._id}`, {state: {fromList: true}});
+                                     }}
                                 >
                                     <img src={item.image} alt={item.name}/>
                                     <Counter count={getIngredientCount(item)} size="default" extraClass="m-1"/>
@@ -131,7 +131,9 @@ const BurgerIngredients = () => {
                                      onDragStart={(event) => handleDragStart(item, event)}
                                      key={item._id}
                                      className={BurgerIngredientsStyle.ingredientItem}
-                                     onClick={() => dispatch(setSelectedIngredient(item))}
+                                     onClick={() => {
+                                         navigate(`/ingredients/${item._id}`, {state: {fromList: true}});
+                                     }}
                                 >
                                     <img src={item.image} alt={item.name}/>
                                     <Counter count={getIngredientCount(item)} size="default" extraClass="m-1"/>
@@ -155,7 +157,9 @@ const BurgerIngredients = () => {
                                      onDragStart={(event) => handleDragStart(item, event)}
                                      key={item._id}
                                      className={BurgerIngredientsStyle.ingredientItem}
-                                     onClick={() => dispatch(setSelectedIngredient(item))}
+                                     onClick={() => {
+                                         navigate(`/ingredients/${item._id}`, {state: {fromList: true}});
+                                     }}
                                 >
                                     <img src={item.image} alt={item.name}/>
                                     <Counter count={getIngredientCount(item)} size="default" extraClass="m-1"/>
@@ -169,16 +173,6 @@ const BurgerIngredients = () => {
                     </div>
                 </div>
             </div>
-            {selectedIngredient && (
-                <Modal
-                    onClose={() => dispatch(removeSelectedIngredient())}
-                    title="Детали ингредиента"
-                >
-                    <div>
-                        <IngredientDetails selectedIngredient={selectedIngredient}/>
-                    </div>
-                </Modal>
-            )}
         </div>
     );
 };
