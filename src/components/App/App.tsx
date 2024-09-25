@@ -3,16 +3,26 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import BurgerIngredients from "../BurgerIngredients/BurgerIngredients";
 import AppStyle from './App.module.css';
 import BurgerConstructor from "../BurgerConstructor/BurgerConstructor";
-import Login from "../Login/Login";
-import Register from "../Register/Register";
-import ForgotPasswordPage from "../ForgotPassword/ForgotPasswordPage";
-import ResetPasswordPage from "../ResetPasswordPage/ResetPasswordPage";
-import ProfilePage from "../ProfilePage/ProfilePage";
-import NotFound404 from "../NotFound404/NotFound404";
+import Login from "../../pages/Login/Login";
+import Register from "../../pages/Register/Register";
+import ForgotPasswordPage from "../../pages/ForgotPassword/ForgotPasswordPage";
+import ResetPasswordPage from "../../pages/ResetPasswordPage/ResetPasswordPage";
+import NotFound404 from "../../pages/NotFound404/NotFound404";
 import ProtectedRouteElement from "../ProtectedRouteElement/ProtectedRouteElement";
-import IngredientPage from "../IngredientPage/IngredientPage";
+import IngredientPage from "../../pages/IngredientPage/IngredientPage";
+import {useDispatch} from "react-redux";
+import {AppDispatch} from "../../index";
+import {useEffect} from "react";
+import {fetchIngredients} from "../../services/slices/Ingredients";
+import ProfilePage from "../../pages/ProfilePage/ProfilePage";
 
 function App() {
+    const dispatch = useDispatch<AppDispatch>();
+
+    useEffect(() => {
+        dispatch(fetchIngredients());
+    }, [dispatch]);
+
     return (
         <div className="App">
             <Router>

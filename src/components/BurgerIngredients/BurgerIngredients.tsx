@@ -3,20 +3,13 @@ import {Counter, CurrencyIcon, Tab} from "@ya.praktikum/react-developer-burger-u
 import BurgerIngredientsStyle from './BurgerIngredients.module.css';
 import {useNavigate} from "react-router-dom";
 import type {BurgerIngredientType, RootState} from "../../domains/entity/index.entity";
-import {useDispatch, useSelector} from "react-redux";
-import {fetchIngredients} from "../../services/slices/Ingredients";
-import {AppDispatch} from "../../index";
+import {useSelector} from "react-redux";
 
 const BurgerIngredients = () => {
-    const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
     const {items: ingredientsData} = useSelector((state: RootState) => state.ingredients);
     const {itemsConstructor, bunsItem} = useSelector((state: RootState) => state.constructorIngredients);
     const [currentTab, setCurrentTab] = useState('buns');
-
-    useEffect(() => {
-        dispatch(fetchIngredients());
-    }, [dispatch]);
 
     const categoriesRef = {
         buns: useRef<HTMLDivElement>(null),
