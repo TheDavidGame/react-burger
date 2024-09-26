@@ -1,12 +1,13 @@
 import React, {useState, useRef, useEffect} from 'react';
 import {Counter, CurrencyIcon, Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerIngredientsStyle from './BurgerIngredients.module.css';
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import type {BurgerIngredientType, RootState} from "../../domains/entity/index.entity";
 import {useSelector} from "react-redux";
 
 const BurgerIngredients = () => {
     const navigate = useNavigate();
+    const location = useLocation();
     const {items: ingredientsData} = useSelector((state: RootState) => state.ingredients);
     const {itemsConstructor, bunsItem} = useSelector((state: RootState) => state.constructorIngredients);
     const [currentTab, setCurrentTab] = useState('buns');
@@ -59,6 +60,10 @@ const BurgerIngredients = () => {
         };
     }, []);
 
+    const handleIngredientClick = (item: BurgerIngredientType) => {
+        navigate(`/ingredients/${item._id}`, {state: {background: location}});
+    };
+
     const handleDragStart = (ingredient: BurgerIngredientType, event: React.DragEvent<HTMLDivElement>) => {
         event.dataTransfer.setData('ingredient', JSON.stringify(ingredient));
     };
@@ -98,9 +103,7 @@ const BurgerIngredients = () => {
                                      onDragStart={(event) => handleDragStart(item, event)}
                                      key={item._id}
                                      className={BurgerIngredientsStyle.ingredientItem}
-                                     onClick={() => {
-                                         navigate(`/ingredients/${item._id}`, {state: {fromList: true}});
-                                     }}
+                                     onClick={() => handleIngredientClick(item)}
                                 >
                                     <img src={item.image} alt={item.name}/>
                                     <Counter count={getIngredientCount(item)} size="default" extraClass="m-1"/>
@@ -124,9 +127,7 @@ const BurgerIngredients = () => {
                                      onDragStart={(event) => handleDragStart(item, event)}
                                      key={item._id}
                                      className={BurgerIngredientsStyle.ingredientItem}
-                                     onClick={() => {
-                                         navigate(`/ingredients/${item._id}`, {state: {fromList: true}});
-                                     }}
+                                     onClick={() => handleIngredientClick(item)}
                                 >
                                     <img src={item.image} alt={item.name}/>
                                     <Counter count={getIngredientCount(item)} size="default" extraClass="m-1"/>
@@ -150,9 +151,7 @@ const BurgerIngredients = () => {
                                      onDragStart={(event) => handleDragStart(item, event)}
                                      key={item._id}
                                      className={BurgerIngredientsStyle.ingredientItem}
-                                     onClick={() => {
-                                         navigate(`/ingredients/${item._id}`, {state: {fromList: true}});
-                                     }}
+                                     onClick={() => handleIngredientClick(item)}
                                 >
                                     <img src={item.image} alt={item.name}/>
                                     <Counter count={getIngredientCount(item)} size="default" extraClass="m-1"/>

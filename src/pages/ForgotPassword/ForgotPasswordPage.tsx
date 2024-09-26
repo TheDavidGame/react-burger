@@ -12,7 +12,8 @@ const ForgotPasswordPage = () => {
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
         const resultAction = await dispatch(fetchForgotPassword(email));
 
         if (fetchForgotPassword.fulfilled.match(resultAction)) {
@@ -26,7 +27,7 @@ const ForgotPasswordPage = () => {
     }, [dispatch]);
 
     return (
-        <div className={`mt-25 ${ForgotPasswordPageStyle.wrapper}`}>
+        <form onSubmit={handleSubmit} className={`mt-25 ${ForgotPasswordPageStyle.wrapper}`}>
             <p className="text text_type_main-medium mb-6">
                 Восстановление пароля
             </p>
@@ -40,7 +41,7 @@ const ForgotPasswordPage = () => {
                 errorText={'Ошибка'}
                 size={'default'}
                 extraClass="mb-6"/>
-            <Button htmlType="button" type="primary" size="large" extraClass="mb-20" onClick={handleSubmit}>
+            <Button htmlType="submit" type="primary" size="large" extraClass="mb-20">
                 Восстановить
             </Button>
             <p className="text text_type_main-default text_color_inactive mb-4">
@@ -49,7 +50,7 @@ const ForgotPasswordPage = () => {
                     Войти
                 </Link>
             </p>
-        </div>
+        </form>
     );
 };
 

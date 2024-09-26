@@ -23,7 +23,6 @@ const Login = () => {
         }
     };
     return (
-        <div>
             <form onSubmit={handleSubmit} className={`mt-25 ${LoginStyle.wrapper}`}>
                 <p className="text text_type_main-medium mb-6">
                     Вход
@@ -57,8 +56,6 @@ const Login = () => {
                     </Link>
                 </p>
             </form>
-
-        </div>
     );
 };
 

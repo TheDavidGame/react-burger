@@ -40,6 +40,10 @@ export interface IngredientsState {
     items: BurgerIngredientType[];
 }
 
+export interface IngredientPageState {
+    showTitle: boolean;
+}
+
 export interface ConstructorIngredientsState {
     itemsConstructor: BurgerIngredientType[];
     bunsItem: BurgerIngredientType | null

@@ -23,7 +23,6 @@ const Register = () => {
     };
 
     return (
-        <div>
             <form onSubmit={handleSubmit} className={`mt-25 ${RegisterStyle.wrapper}`}>
                 <p className="text text_type_main-medium mb-6">
                     Регистрация
@@ -62,7 +61,6 @@ const Register = () => {
                     </Link>
                 </p>
             </form>
-        </div>
     );
 };
 

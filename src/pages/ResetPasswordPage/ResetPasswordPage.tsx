@@ -22,40 +22,38 @@ const ResetPasswordPage = () => {
     };
 
     return (
-        <div>
-            <form onSubmit={handleSubmit} className={`mt-25 ${ResetPasswordPageStyle.wrapper}`}>
-                <p className="text text_type_main-medium mb-6">
-                    Восстановление пароля
-                </p>
-                <PasswordInput
-                    placeholder={'Введите новый пароль'}
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
-                    name={'password'}
-                    extraClass="mb-6"
-                />
-                <Input
-                    type={'text'}
-                    placeholder={'Введите код из письма'}
-                    onChange={e => setToken(e.target.value)}
-                    value={token}
-                    name={'token'}
-                    error={false}
-                    errorText={'Ошибка'}
-                    size={'default'}
-                    extraClass="mb-6"
-                />
-                <Button htmlType="submit" type="primary" size="large" extraClass="mb-20">
-                    Сохранить
-                </Button>
-                <p className="text text_type_main-default text_color_inactive mb-4">
-                    Вспомнили пароль?
-                    <Link to='/login' className="ml-1">
-                        Войти
-                    </Link>
-                </p>
-            </form>
-        </div>
+        <form onSubmit={handleSubmit} className={`mt-25 ${ResetPasswordPageStyle.wrapper}`}>
+            <p className="text text_type_main-medium mb-6">
+                Восстановление пароля
+            </p>
+            <PasswordInput
+                placeholder={'Введите новый пароль'}
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                name={'password'}
+                extraClass="mb-6"
+            />
+            <Input
+                type={'text'}
+                placeholder={'Введите код из письма'}
+                onChange={e => setToken(e.target.value)}
+                value={token}
+                name={'token'}
+                error={false}
+                errorText={'Ошибка'}
+                size={'default'}
+                extraClass="mb-6"
+            />
+            <Button htmlType="submit" type="primary" size="large" extraClass="mb-20">
+                Сохранить
+            </Button>
+            <p className="text text_type_main-default text_color_inactive mb-4">
+                Вспомнили пароль?
+                <Link to='/login' className="ml-1">
+                    Войти
+                </Link>
+            </p>
+        </form>
     );
 };
 

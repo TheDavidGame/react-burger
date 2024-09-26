@@ -11,6 +11,7 @@ import constructorIngredients from './services/slices/ConstructorIngredients'
 import order from './services/slices/Order'
 import forgotPasswordSlice from './services/slices/ForgotPasswordSlice'
 import serverSlice from './services/slices/ServerSlice'
+import { BrowserRouter as Router } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -31,7 +32,9 @@ export type AppDispatch = typeof store.dispatch;
 root.render(
     <React.StrictMode>
         <Provider store={store}>
-            <App/>
+            <Router>
+                <App/>
+            </Router>
         </Provider>
     </React.StrictMode>
 );
