@@ -11,20 +11,27 @@ const ProtectedRouteElement = ({children, redirectPath}: ProtectedRouteElementPr
     const user = useSelector((state: RootState) => state.serverSlice.user);
     const restrictedPaths = ['/login', '/register', '/forgot-password', '/reset-password'];
     const location = useLocation();
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        if (!user) {
-            dispatch(fetchUserData());
-        }
+        const fetchData = async () => {
+            if (!user) {
+                await dispatch(fetchUserData());
+            }
+            setIsLoading(false);
+        };
+        fetchData();
     }, [dispatch, user]);
 
-    if (user && restrictedPaths.includes(window.location.pathname)) {
-        return <Navigate to="/" replace/>;
-    }
+    if (!isLoading) {
+        if (user && restrictedPaths.includes(location.pathname)) {
+            return <Navigate to="/" replace/>;
+        }
 
-    if (!user && !restrictedPaths.includes(window.location.pathname)) {
-        localStorage.setItem('redirectPath', location.pathname);
-        return <Navigate to="/login" replace/>;
+        if (!user && !restrictedPaths.includes(location.pathname)) {
+            localStorage.setItem('redirectPath', location.pathname);
+            return <Navigate to="/login" replace/>;
+        }
     }
 
     if (!visitedForgotPassword && window.location.pathname === '/reset-password') {
