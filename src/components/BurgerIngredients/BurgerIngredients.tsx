@@ -1,24 +1,16 @@
 import React, {useState, useRef, useEffect} from 'react';
 import {Counter, CurrencyIcon, Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerIngredientsStyle from './BurgerIngredients.module.css';
-import Modal from '../Modal/Modal';
-import IngredientDetails from "../IngredientDetails/IngredientDetails";
+import {useLocation, useNavigate} from "react-router-dom";
 import type {BurgerIngredientType, RootState} from "../../domains/entity/index.entity";
-import {useDispatch, useSelector} from "react-redux";
-import {fetchIngredients} from "../../services/slices/Ingredients";
-import {AppDispatch} from "../../index";
-import {removeSelectedIngredient, setSelectedIngredient} from "../../services/slices/IngredientInformation";
+import {useSelector} from "react-redux";
 
 const BurgerIngredients = () => {
-    const dispatch = useDispatch<AppDispatch>();
+    const navigate = useNavigate();
+    const location = useLocation();
     const {items: ingredientsData} = useSelector((state: RootState) => state.ingredients);
     const {itemsConstructor, bunsItem} = useSelector((state: RootState) => state.constructorIngredients);
-    const {selectedIngredient} = useSelector((state: RootState) => state.ingredientInformation);
     const [currentTab, setCurrentTab] = useState('buns');
-
-    useEffect(() => {
-        dispatch(fetchIngredients());
-    }, [dispatch]);
 
     const categoriesRef = {
         buns: useRef<HTMLDivElement>(null),
@@ -68,6 +60,10 @@ const BurgerIngredients = () => {
         };
     }, []);
 
+    const handleIngredientClick = (item: BurgerIngredientType) => {
+        navigate(`/ingredients/${item._id}`, {state: {background: location}});
+    };
+
     const handleDragStart = (ingredient: BurgerIngredientType, event: React.DragEvent<HTMLDivElement>) => {
         event.dataTransfer.setData('ingredient', JSON.stringify(ingredient));
     };
@@ -107,7 +103,7 @@ const BurgerIngredients = () => {
                                      onDragStart={(event) => handleDragStart(item, event)}
                                      key={item._id}
                                      className={BurgerIngredientsStyle.ingredientItem}
-                                     onClick={() => dispatch(setSelectedIngredient(item))}
+                                     onClick={() => handleIngredientClick(item)}
                                 >
                                     <img src={item.image} alt={item.name}/>
                                     <Counter count={getIngredientCount(item)} size="default" extraClass="m-1"/>
@@ -131,7 +127,7 @@ const BurgerIngredients = () => {
                                      onDragStart={(event) => handleDragStart(item, event)}
                                      key={item._id}
                                      className={BurgerIngredientsStyle.ingredientItem}
-                                     onClick={() => dispatch(setSelectedIngredient(item))}
+                                     onClick={() => handleIngredientClick(item)}
                                 >
                                     <img src={item.image} alt={item.name}/>
                                     <Counter count={getIngredientCount(item)} size="default" extraClass="m-1"/>
@@ -155,7 +151,7 @@ const BurgerIngredients = () => {
                                      onDragStart={(event) => handleDragStart(item, event)}
                                      key={item._id}
                                      className={BurgerIngredientsStyle.ingredientItem}
-                                     onClick={() => dispatch(setSelectedIngredient(item))}
+                                     onClick={() => handleIngredientClick(item)}
                                 >
                                     <img src={item.image} alt={item.name}/>
                                     <Counter count={getIngredientCount(item)} size="default" extraClass="m-1"/>
@@ -169,16 +165,6 @@ const BurgerIngredients = () => {
                     </div>
                 </div>
             </div>
-            {selectedIngredient && (
-                <Modal
-                    onClose={() => dispatch(removeSelectedIngredient())}
-                    title="Детали ингредиента"
-                >
-                    <div>
-                        <IngredientDetails selectedIngredient={selectedIngredient}/>
-                    </div>
-                </Modal>
-            )}
         </div>
     );
 };

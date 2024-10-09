@@ -1,3 +1,5 @@
+import {ReactNode} from "react";
+
 export interface BurgerIngredientType {
     _id: string;
     uniqueId?: string;
@@ -14,6 +16,11 @@ export interface BurgerIngredientType {
     count: number;
 }
 
+export interface User {
+    email: string;
+    name: string;
+}
+
 export interface ModalOverlayProps {
     onClose: () => void;
 }
@@ -26,10 +33,15 @@ export interface ModalProps {
 
 export interface IngredientDetailsProps {
     selectedIngredient: BurgerIngredientType;
+    showTitle: boolean
 }
 
 export interface IngredientsState {
     items: BurgerIngredientType[];
+}
+
+export interface IngredientPageState {
+    showTitle: boolean;
 }
 
 export interface ConstructorIngredientsState {
@@ -37,17 +49,30 @@ export interface ConstructorIngredientsState {
     bunsItem: BurgerIngredientType | null
 }
 
-export interface IngredientInformationState {
-    selectedIngredient: BurgerIngredientType | null;
-}
-
 export interface RootState {
     ingredients: IngredientsState;
     constructorIngredients: ConstructorIngredientsState;
-    ingredientInformation: IngredientInformationState;
     order: OrderState;
+    forgotPassword: ForgotPasswordState;
+    serverSlice: ServerSliceState;
 }
 
 export interface OrderState {
     orderNumber: number | null;
+}
+
+export interface ForgotPasswordState {
+    successMessage: string | null;
+}
+
+export interface ServerSliceState {
+    user: {} | null,
+    accessToken: string | null,
+    refreshToken: string | null,
+    visitedForgotPassword: boolean,
+}
+
+export interface ProtectedRouteElementProps {
+    children: ReactNode;
+    redirectPath?: string;
 }

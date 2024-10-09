@@ -1,0 +1,24 @@
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.description {
+    width: 320px;
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+}
+
+.link {
+    text-decoration: none;
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+}
